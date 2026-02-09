@@ -73,7 +73,19 @@ def test__ajouter_tuile():
 
 def test__supprimer_zeros():
     print("----> Tests de _supprimer_zeros...")
-    raise NotImplementedError("Tests de _supprimer_zeros non implémentés.")
+    entrees_attendus = (
+        ([0,0,0],[]),
+        ([0,0,2],[2]),
+        ((0,2,2),[2,2]),
+        ([2,2,2],[2,2,2]),
+        ([0,2,0],[2]),
+        ([2,0,0],[2]),
+        ([2,2,0],[2,2]),
+        ([2,0,2],[2,2])
+    )
+    for entree,attendu in entrees_attendus:
+        result = _supprimer_zeros(entree)
+        assert result == attendu, f"entree :{entree}, attendu {attendu} or j'ai eu {result}"
     print("OK")
 
 def test__fusionner():

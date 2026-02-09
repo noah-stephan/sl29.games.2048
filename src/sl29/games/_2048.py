@@ -1,6 +1,7 @@
 """Module providing the logic of the 2048 game"""
 
 import random
+import copy
 from typing import List, Tuple
 
 TAILLE:int = 4
@@ -17,7 +18,10 @@ def nouvelle_partie() -> Tuple[List[List[int]], int]:
     :return: Une grille TAILLExTAILLE initialisée avec deux tuiles, ainsi que le score à 0.
     :rtype: Tuple[List[List[int]], int]
     """
-    raise NotImplementedError("Fonction nouvelle_partie non implémentée.")
+    plateau = _creer_plateau_vide()
+    plateau1 = _ajouter_tuile(plateau)
+    plateau2 = _ajouter_tuile(plateau1)
+    return (plateau2, 0)
 
 def jouer_coup(plateau: List[List[int]], direction: str) -> tuple[List[List[int]], int, bool]:
     """
@@ -43,7 +47,7 @@ def _creer_plateau_vide() -> List[List[int]]:
     :return: Une grille vide.
     :rtype: List[List[int]]
     """
-    raise NotImplementedError("Fonction _creer_plateau_vide non implémentée.")
+    return [[0 for _ in range(TAILLE)] for _ in range(TAILLE)]
 
 def _get_cases_vides(plateau: List[List[int]]) -> List[Tuple[int, int]]:
     """
@@ -54,7 +58,12 @@ def _get_cases_vides(plateau: List[List[int]]) -> List[Tuple[int, int]]:
     :return: Une liste de coordonnées
     :rtype: List[Tuple[int, int]]
     """
-    raise NotImplementedError("Fonction _get_cases_vides non implémentée.")
+    result = []
+    for i in range(len(plateau)):
+        for j in range(len(plateau)):
+            if plateau[i][j] == 0:
+                result.append((i,j))
+    return result
 
 def _ajouter_tuile(plateau: List[List[int]]) -> List[List[int]]:
     """
@@ -65,7 +74,13 @@ def _ajouter_tuile(plateau: List[List[int]]) -> List[List[int]]:
     :return: Une nouvelle grille avec une tuile ajoutée.
     :rtype: List[List[int]]
     """
-    raise NotImplementedError("Fonction _ajouter_tuile non implémentée.")
+    cases_vides = _get_cases_vides(plateau)
+    ma_case_vide = random.choice(cases_vides)
+    n_plateau = copy.deepcopy(plateau)
+    i = ma_case_vide[0]
+    j = ma_case_vide[1]
+    n_plateau[i][j] = 2
+    return n_plateau
 
 def _supprimer_zeros(ligne: List[int]) -> List[int]:
     """
@@ -76,7 +91,7 @@ def _supprimer_zeros(ligne: List[int]) -> List[int]:
     :return: La ligne sans zéros.
     :rtype: List[int]
     """
-    raise NotImplementedError("Fonction _supprimer_zeros non implémentée.")
+    
 
 def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
     """
