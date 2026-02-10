@@ -35,7 +35,25 @@ def jouer_coup(plateau: List[List[int]], direction: str) -> tuple[List[List[int]
     :rtype: tuple[List[List[int]], int, bool]
     """
 
-    raise NotImplementedError("Fonction jouer_coup non implémentée.")
+    # En fonction de la direction choisie on effectue les déplacement du plateau
+    if direction == "g":
+        nouveau, points_du_coup = _deplacer_gauche(plateau)
+    elif direction == "d":
+        nouveau, points_du_coup = _deplacer_droite(plateau)
+    elif direction == "h":
+        nouveau, points_du_coup = _deplacer_haut(plateau)
+    elif direction == 'b':
+        nouveau, points_du_coup = _deplacer_bas(plateau)
+    else:
+        return plateau, 0, False
+
+    if nouveau != plateau:
+        nouveau = _ajouter_tuile(nouveau)
+
+    # Vérification si partie terminée ou non
+    fini: bool = _partie_terminee(nouveau)
+
+    return nouveau, points_du_coup, fini
 
 # ==========================================================
 # 🔒 FONCTIONS PRIVÉES (LOGIQUE INTERNE)
