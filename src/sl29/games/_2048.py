@@ -109,7 +109,11 @@ def _supprimer_zeros(ligne: List[int]) -> List[int]:
     :return: La ligne sans zéros.
     :rtype: List[int]
     """
-    
+    nouvelle_ligne = []
+    for nombre in ligne:
+        if nombre != 0:
+            nouvelle_ligne.append(nombre)
+    return nouvelle_ligne
 
 def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
     """
